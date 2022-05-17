@@ -1,9 +1,8 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:learnabc/utils/Func.dart';
-import 'package:learnabc/widgets/button_widget.dart';
+import 'package:learnabc/screens/preview.dart';
+import 'package:learnabc/utils/AppRoutes.dart';
 import 'package:learnabc/widgets/card_widget.dart';
 
 void main() {
@@ -19,216 +18,9 @@ void main() {
                   page: () => const MyHomePage(
                         title: 'hello world',
                       )),
+              GetPage(name: AppRoutes.preview, page: () => const Preview()),
             ],
           )));
-}
-
-class Preview extends StatefulWidget {
-  const Preview({Key? key}) : super(key: key);
-
-  @override
-  State<Preview> createState() => _PreviewState();
-}
-
-class _PreviewState extends State<Preview> {
-  int _currentPage = 0;
-
-  final PageController pageController = PageController(viewportFraction: 1);
-
-  List items = [
-    {
-      "letter": "أ",
-      "word": "أرنب",
-      "img": "animals/rabbit.png",
-      "audio": "1.mp3",
-    },
-    {
-      "letter": "ب",
-      "word": "ببغاء",
-      "img": "animals/parrot.png",
-      "audio": "2.mp3",
-    },
-    {
-      "letter": "ت",
-      "word": "تمساح",
-      "img": "animals/crocodile.png",
-      "audio": "3.mp3",
-    },
-  ];
-  AudioPlayer audioPlayer = AudioPlayer();
-  final player = AudioCache(prefix: "assets/sounds/");
-  play(String audio) async {
-    final url = await player.load(audio);
-    await audioPlayer.play(url.path, isLocal: true);
-  }
-
-  var randomColor = Color(Funcs.getRandomColor());
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-            child: Container(
-      padding: const EdgeInsets.all(10.0),
-      height: double.infinity,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        // color: Color(0xffBDE6F1),
-        image: DecorationImage(
-          alignment: Alignment.bottomCenter,
-          image: AssetImage("assets/green-earth.png"),
-          fit: BoxFit.contain,
-        ),
-      ),
-      child: Container(
-        child: Column(
-          children: [
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Button(
-                      onTap: () {
-                        print("backword - clicked...................");
-                      },
-                      img: "buttons/backword.png",
-                      size: 60.w),
-                  Text(
-                    "الحروف",
-                    style: TextStyle(
-                      fontSize: 40.sp,
-                      fontFamily: "Dahka",
-                      color: const Color(0xFF3A3845),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            SizedBox(
-              height: 440.h,
-              width: double.infinity,
-              child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  controller: pageController,
-                  onPageChanged: (index) {
-                    print(index);
-                    play(items[index]["audio"]);
-                    setState(() {
-                      _currentPage = index;
-                    });
-                  },
-                  itemCount: items.length,
-                  reverse: true,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        SizedBox(
-                          width: 300.w,
-                          height: 400.h,
-                          // color: Colors.amber[100],
-                          child: Stack(children: [
-                            Positioned.fill(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  margin: EdgeInsets.only(top: 40.h),
-                                  width: 250.w,
-                                  height: 250.w,
-                                  decoration: BoxDecoration(
-                                    // color: Colors.red,
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/${items[index]["img"]}'),
-                                      fit: BoxFit.contain,
-                                    ),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10.0)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned.fill(
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  "${items[index]["letter"]}",
-                                  style: TextStyle(
-                                      fontFamily: "Madani",
-                                      fontSize: 100.sp,
-                                      color: randomColor),
-                                ),
-                              ),
-                            ),
-                            Positioned.fill(
-                              bottom: -10.h,
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  "${items[index]["word"]}",
-                                  style: TextStyle(
-                                    fontSize: 65.sp,
-                                    fontFamily: 'Madani',
-                                    color: Color(Funcs.getRandomColor()),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                        SizedBox(
-                          height: 40.h,
-                        ),
-                      ],
-                    );
-                  }),
-            ),
-            Center(
-              child: SizedBox(
-                width: 300.w,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Button(
-                        onTap: () {
-                          print("backword - clicked...................");
-                          print(_currentPage + 1);
-                          pageController.animateToPage(_currentPage + 1,
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.easeIn);
-                        },
-                        img: "buttons/backword.png",
-                        size: 80.w),
-                    Button(
-                        onTap: () {
-                          print("clicked...................");
-                          play(items[_currentPage]["audio"]);
-                        },
-                        img: "buttons/volume.png",
-                        size: 110.w),
-                    Button(
-                        onTap: () {
-                          print("forword - clicked...................");
-                          if (_currentPage > 0) {
-                            print(_currentPage - 1);
-                            pageController.animateToPage(_currentPage - 1,
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.easeIn);
-                          }
-                        },
-                        img: "buttons/forword.png",
-                        size: 80.w),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    )));
-  }
 }
 
 // ==========================
@@ -315,32 +107,104 @@ class _MyHomePageState extends State<MyHomePage> {
                     CardWidget(
                         img: "letters.png",
                         title: "الحروف",
+                        items: [
+                          {
+                            "letter": "أ",
+                            "word": "أرنب",
+                            "img": "animals/rabbit.png",
+                            "audio": "letters/1.mp3",
+                          },
+                          {
+                            "letter": "ب",
+                            "word": "ببغاء",
+                            "img": "animals/parrot.png",
+                            "audio": "letters/2.mp3",
+                          },
+                          {
+                            "letter": "ت",
+                            "word": "تمساح",
+                            "img": "animals/crocodile.png",
+                            "audio": "letters/3.mp3",
+                          },
+                        ],
                         bgColor: 0xFF83BD75,
                         shadowColor: 0xFF4E944F),
-                    CardWidget(
-                        img: "numbers.png",
-                        title: "اﻷعداد",
-                        bgColor: 0xFFA85CF9,
-                        shadowColor: 0xFF5534A5),
-                    CardWidget(
-                      img: "colors.png",
-                      title: "اﻷلوان",
-                      bgColor: 0xFFF94892,
-                      shadowColor: 0xFFE60965,
-                    ),
-                    CardWidget(
-                        img: "colors.png",
-                        title: "الحيوانات",
-                        bgColor: 0xFFEFD345,
-                        shadowColor: 0xFFBABD42),
-                    CardWidget(
-                        img: "colors.png",
-                        title: " الفواكه و الخضار",
-                        bgColor: 0xFF83BD75,
-                        shadowColor: 0xFF4E944F),
+                    // CardWidget(
+                    //     img: "numbers.png",
+                    //     title: "اﻷعداد",
+                    //     bgColor: 0xFFA85CF9,
+                    //     shadowColor: 0xFF5534A5),
+                    // CardWidget(
+                    //   img: "colors.png",
+                    //   title: "اﻷلوان",
+                    //   bgColor: 0xFFF94892,
+                    //   shadowColor: 0xFFE60965,
+                    // ),
+                    // CardWidget(
+                    //     img: "colors.png",
+                    //     title: "الحيوانات",
+                    //     bgColor: 0xFFEFD345,
+                    //     shadowColor: 0xFFBABD42),
+                    // CardWidget(
+                    //     img: "colors.png",
+                    //     title: " الفواكه و الخضار",
+                    //     bgColor: 0xFF83BD75,
+                    //     shadowColor: 0xFF4E944F),
                     CardWidget(
                       img: "shapes.png",
                       title: "اﻷشكال",
+                      items: [
+                        {
+                          "word": "مثلث",
+                          "img": "shapes/triangle.png",
+                          "audio": "shapes/trianlge.mp3",
+                        },
+                        {
+                          "word": "مربع",
+                          "img": "shapes/square.png",
+                          "audio": "shapes/square.mp3",
+                        },
+                        {
+                          "word": "دائرة",
+                          "img": "shapes/circle.png",
+                          "audio": "shapes/circle.mp3",
+                        },
+                        {
+                          "word": "مستطيل",
+                          "img": "shapes/rectangle.png",
+                          "audio": "shapes/rectangle.mp3",
+                        },
+                        {
+                          "word": "معين",
+                          "img": "shapes/rhombus.png",
+                          "audio": "shapes/rhombus.mp3",
+                        },
+                        {
+                          "word": "هلال",
+                          "img": "shapes/crescent-moon.png",
+                          "audio": "shapes/crescent-moon.mp3",
+                        },
+                        {
+                          "word": "خماسي",
+                          "img": "shapes/pantagon.png",
+                          "audio": "shapes/pantagon.mp3",
+                        },
+                        {
+                          "word": "سداسي",
+                          "img": "shapes/hexagon.png",
+                          "audio": "shapes/hexagon.mp3",
+                        },
+                        {
+                          "word": "نجمة",
+                          "img": "shapes/star.png",
+                          "audio": "shapes/star.mp3",
+                        },
+                        {
+                          "word": "قلب",
+                          "img": "shapes/heart.png",
+                          "audio": "shapes/heart.mp3",
+                        },
+                      ],
                       bgColor: 0xFF0AA1DD,
                       shadowColor: 0xFF2155CD,
                     ),
