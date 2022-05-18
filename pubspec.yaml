@@ -68,11 +68,12 @@ flutter:
     - assets/sounds/shapes/
     - assets/sounds/numbers/
     - assets/sounds/colors/
+    - assets/sounds/animals/
+    - assets/animals/
     - assets/colors/
     - assets/numbers/
     - assets/buttons/
     - assets/letters/
-    - assets/animals/
     - assets/shapes/
   #   - images/a_dot_ham.jpeg
 

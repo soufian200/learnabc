@@ -90,12 +90,12 @@ class _PreviewState extends State<Preview> {
                   scrollDirection: Axis.horizontal,
                   controller: pageController,
                   onPageChanged: (index) {
-                    play(_items[index]["audio"]);
+                    play(_items[index % _items.length]["audio"]);
                     setState(() {
                       _currentPage = index;
                     });
                   },
-                  itemCount: _items.length,
+                  // itemCount: _items.length,
                   reverse: true,
                   itemBuilder: (context, index) {
                     return Column(
@@ -116,7 +116,7 @@ class _PreviewState extends State<Preview> {
                                     // color: Colors.red,
                                     image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/${_items[index]["img"]}'),
+                                          'assets/${_items[index % _items.length]["img"]}'),
                                       fit: BoxFit.contain,
                                     ),
                                     borderRadius: const BorderRadius.all(
@@ -125,13 +125,13 @@ class _PreviewState extends State<Preview> {
                                 ),
                               ),
                             ),
-                            _items[index]["letter"] == null
+                            _items[index % _items.length]["letter"] == null
                                 ? const SizedBox()
                                 : Positioned.fill(
                                     child: Align(
                                       alignment: Alignment.topRight,
                                       child: Text(
-                                        "${_items[index]["letter"]}",
+                                        "${_items[index % _items.length]["letter"]}",
                                         style: TextStyle(
                                             fontFamily: "Madani",
                                             fontSize: 100.sp,
@@ -144,7 +144,7 @@ class _PreviewState extends State<Preview> {
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Text(
-                                  "${_items[index]["word"]}",
+                                  "${_items[index % _items.length]["word"]}",
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                     fontSize: 60.sp,
