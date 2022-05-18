@@ -67,6 +67,8 @@ flutter:
     - assets/sounds/letters/
     - assets/sounds/shapes/
     - assets/sounds/numbers/
+    - assets/sounds/colors/
+    - assets/colors/
     - assets/numbers/
     - assets/buttons/
     - assets/letters/

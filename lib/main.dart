@@ -186,12 +186,69 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                         bgColor: 0xFFA85CF9,
                         shadowColor: 0xFF5534A5),
-                    // CardWidget(
-                    //   img: "colors.png",
-                    //   title: "اﻷلوان",
-                    //   bgColor: 0xFFF94892,
-                    //   shadowColor: 0xFFE60965,
-                    // ),
+                    CardWidget(
+                      img: "colors.png",
+                      title: "اﻷلوان",
+                      items: [
+                        {
+                          "word": "أسود",
+                          "img": "colors/black.png",
+                          "audio": "colors/black.mp3",
+                        },
+                        {
+                          "word": "أزرق",
+                          "img": "colors/blue.png",
+                          "audio": "colors/blue.mp3",
+                        },
+                        {
+                          "word": "بنّي",
+                          "img": "colors/brown.png",
+                          "audio": "colors/brown.mp3",
+                        },
+                        {
+                          "word": "أخضر",
+                          "img": "colors/green.png",
+                          "audio": "colors/green.mp3",
+                        },
+                        {
+                          "word": "رمادي",
+                          "img": "colors/grey.png",
+                          "audio": "colors/grey.mp3",
+                        },
+                        {
+                          "word": "برتقالي",
+                          "img": "colors/orange.png",
+                          "audio": "colors/orange.mp3",
+                        },
+                        {
+                          "word": "وردي",
+                          "img": "colors/pink.png",
+                          "audio": "colors/pink.mp3",
+                        },
+                        {
+                          "word": "بنفسجي",
+                          "img": "colors/purple.png",
+                          "audio": "colors/purple.mp3",
+                        },
+                        {
+                          "word": "أحمر",
+                          "img": "colors/red.png",
+                          "audio": "colors/red.mp3",
+                        },
+                        {
+                          "word": "أصفر",
+                          "img": "colors/yellow.png",
+                          "audio": "colors/yellow.mp3",
+                        },
+                        {
+                          "word": "أبيض",
+                          "img": "colors/white.png",
+                          "audio": "colors/white.mp3",
+                        },
+                      ],
+                      bgColor: 0xFFF94892,
+                      shadowColor: 0xFFE60965,
+                    ),
                     // CardWidget(
                     //     img: "colors.png",
                     //     title: "الحيوانات",

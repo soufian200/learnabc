@@ -147,9 +147,9 @@ class _PreviewState extends State<Preview> {
                                   "${_items[index]["word"]}",
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
-                                    fontSize: 65.sp,
+                                    fontSize: 60.sp,
                                     fontFamily: 'Madani',
-                                    color: Color(Funcs.getRandomColor()),
+                                    color: const Color(0xff1A132F),
                                   ),
                                 ),
                               ),
