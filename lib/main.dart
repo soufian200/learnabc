@@ -129,11 +129,63 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                         bgColor: 0xFF83BD75,
                         shadowColor: 0xFF4E944F),
-                    // CardWidget(
-                    //     img: "numbers.png",
-                    //     title: "اﻷعداد",
-                    //     bgColor: 0xFFA85CF9,
-                    //     shadowColor: 0xFF5534A5),
+                    CardWidget(
+                        img: "numbers.png",
+                        title: "اﻷعداد",
+                        items: [
+                          {
+                            "word": "واحد",
+                            "img": "numbers/1.png",
+                            "audio": "numbers/1.mp3",
+                          },
+                          {
+                            "word": "إثنان",
+                            "img": "numbers/2.png",
+                            "audio": "numbers/2.mp3",
+                          },
+                          {
+                            "word": "ثلاثة",
+                            "img": "numbers/3.png",
+                            "audio": "numbers/3.mp3",
+                          },
+                          {
+                            "word": "أربعة",
+                            "img": "numbers/4.png",
+                            "audio": "numbers/4.mp3",
+                          },
+                          {
+                            "word": "خمسة",
+                            "img": "numbers/5.png",
+                            "audio": "numbers/5.mp3",
+                          },
+                          {
+                            "word": "ستّة",
+                            "img": "numbers/6.png",
+                            "audio": "numbers/6.mp3",
+                          },
+                          {
+                            "word": "سبعة",
+                            "img": "numbers/7.png",
+                            "audio": "numbers/7.mp3",
+                          },
+                          {
+                            "word": "ثامنية",
+                            "img": "numbers/8.png",
+                            "audio": "numbers/8.mp3",
+                          },
+                          {
+                            "word": "تعسة",
+                            "img": "numbers/9.png",
+                            "audio": "numbers/9.mp3",
+                          },
+                          {
+                            "word": "عشرة",
+                            "img": "numbers/10.png",
+                            "audio": "numbers/10.mp3",
+                          },
+                        ],
+                        bgColor: 0xFFA85CF9,
+                        shadowColor: 0xFF5534A5),
                     // CardWidget(
                     //   img: "colors.png",
                     //   title: "اﻷلوان",
