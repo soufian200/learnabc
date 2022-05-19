@@ -37,6 +37,7 @@ dependencies:
   flutter_screenutil: ^5.5.2
   get: ^4.6.1
   audioplayers: ^0.20.1
+  launch_review: ^3.0.1
 
 dev_dependencies:
   flutter_test:
