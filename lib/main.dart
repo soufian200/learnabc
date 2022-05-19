@@ -259,7 +259,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           {
                             "letter": "ي",
                             "word": "يمامة",
-                            "img": "animals/dove.png",
+                            "img": "animals/dov.png",
                             "audio": "letters/28.mp3",
                           },
                         ],
@@ -537,9 +537,34 @@ class _MyHomePageState extends State<MyHomePage> {
                             "audio": "vegetables&fruits/banana.mp3",
                           },
                           {
+                            "word": "جزر",
+                            "img": "vegetables&fruits/carrot.png",
+                            "audio": "vegetables&fruits/carrot.mp3",
+                          },
+                          {
                             "word": "كرز",
                             "img": "vegetables&fruits/cherry.png",
                             "audio": "vegetables&fruits/cherry.mp3",
+                          },
+                          {
+                            "word": "ذرة",
+                            "img": "vegetables&fruits/corn.png",
+                            "audio": "vegetables&fruits/corn.mp3",
+                          },
+                          {
+                            "word": "خيار",
+                            "img": "vegetables&fruits/cucumber.png",
+                            "audio": "vegetables&fruits/cucumber.mp3",
+                          },
+                          {
+                            "word": "باذنجان",
+                            "img": "vegetables&fruits/eggplanet.png",
+                            "audio": "vegetables&fruits/eggplanet.mp3",
+                          },
+                          {
+                            "word": "ثوم",
+                            "img": "vegetables&fruits/garlic.png",
+                            "audio": "vegetables&fruits/garlic.mp3",
                           },
                           {
                             "word": "عنب",
@@ -552,6 +577,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             "audio": "vegetables&fruits/lemon.mp3",
                           },
                           {
+                            "word": "بصل",
+                            "img": "vegetables&fruits/onion.png",
+                            "audio": "vegetables&fruits/onion.mp3",
+                          },
+                          {
                             "word": "برتقال",
                             "img": "vegetables&fruits/orange.png",
                             "audio": "vegetables&fruits/orange.mp3",
@@ -560,6 +590,16 @@ class _MyHomePageState extends State<MyHomePage> {
                             "word": "إجاص",
                             "img": "vegetables&fruits/pear.png",
                             "audio": "vegetables&fruits/pear.mp3",
+                          },
+                          {
+                            "word": "بازيلاء",
+                            "img": "vegetables&fruits/peas.png",
+                            "audio": "vegetables&fruits/peas.mp3",
+                          },
+                          {
+                            "word": "فلفل",
+                            "img": "vegetables&fruits/pepper.png",
+                            "audio": "vegetables&fruits/pepper.mp3",
                           },
                           {
                             "word": "أناناس",
@@ -572,9 +612,29 @@ class _MyHomePageState extends State<MyHomePage> {
                             "audio": "vegetables&fruits/pomegranate.mp3",
                           },
                           {
+                            "word": "بطاطا",
+                            "img": "vegetables&fruits/potatoes.png",
+                            "audio": "vegetables&fruits/potatoes.mp3",
+                          },
+                          {
+                            "word": "يقطين",
+                            "img": "vegetables&fruits/pumpkin.png",
+                            "audio": "vegetables&fruits/pumpkin.mp3",
+                          },
+                          {
+                            "word": "فجل",
+                            "img": "vegetables&fruits/radish.png",
+                            "audio": "vegetables&fruits/radish.mp3",
+                          },
+                          {
                             "word": "فراولة",
                             "img": "vegetables&fruits/strawberry.png",
                             "audio": "vegetables&fruits/strawberry.mp3",
+                          },
+                          {
+                            "word": "طماطم",
+                            "img": "vegetables&fruits/tomatoes.png",
+                            "audio": "vegetables&fruits/tomatoes.mp3",
                           },
                           {
                             "word": "بطيخ",
