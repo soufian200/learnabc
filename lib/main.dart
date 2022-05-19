@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learnabc/screens/preview.dart';
@@ -6,6 +7,11 @@ import 'package:learnabc/utils/AppRoutes.dart';
 import 'package:learnabc/widgets/card_widget.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xff82954B), // navigation bar color
+    statusBarColor: Color(0xff82954B), // status bar color
+  ));
+
   runApp(ScreenUtilInit(
       designSize: const Size(414, 736),
       builder: (_) => GetMaterialApp(
@@ -382,151 +388,152 @@ class _MyHomePageState extends State<MyHomePage> {
                           "audio": "colors/white.mp3",
                         },
                       ],
+                      bgColor: 0xFFFF7F3F,
+                      shadowColor: 0xFFEA5C2B,
+                    ),
+                    CardWidget(
+                      img: "animals.png",
+                      title: "الحيوانات",
+                      items: [
+                        {
+                          "word": "لاما",
+                          "img": "animals/lama.png",
+                          "audio": "animals/lama.mp3",
+                        },
+                        {
+                          "word": "ثعبان",
+                          "img": "animals/snake.png",
+                          "audio": "animals/snake.mp3",
+                        },
+                        {
+                          "word": "وحيد القرن",
+                          "img": "animals/unicorn.png",
+                          "audio": "animals/unicorn.mp3",
+                        },
+                        {
+                          "word": "أسود",
+                          "img": "animals/shark.png",
+                          "audio": "animals/shark.mp3",
+                        },
+                        {
+                          "word": "ظبي",
+                          "img": "animals/shark.png",
+                          "audio": "animals/elephant.mp3",
+                        },
+                        {
+                          "word": "فيل",
+                          "img": "animals/shark.png",
+                          "audio": "animals/elephant.mp3",
+                        },
+                        {
+                          "word": "قرد",
+                          "img": "animals/shark.png",
+                          "audio": "animals/monkey.mp3",
+                        },
+                        {
+                          "word": "غزال",
+                          "img": "animals/shark.png",
+                          "audio": "animals/deer.mp3",
+                        },
+                        {
+                          "word": "دبّ",
+                          "img": "animals/bear.png",
+                          "audio": "animals/bear.mp3",
+                        },
+                        {
+                          "word": "جمل",
+                          "img": "animals/camel.png",
+                          "audio": "animals/camel.mp3",
+                        },
+                        {
+                          "word": "كتكوت",
+                          "img": "animals/chick.png",
+                          "audio": "animals/chick.mp3",
+                        },
+                        {
+                          "word": "دجاجة",
+                          "img": "animals/chicken.png",
+                          "audio": "animals/chicken.mp3",
+                        },
+                        {
+                          "word": "ديك",
+                          "img": "animals/cock.png",
+                          "audio": "animals/cock.mp3",
+                        },
+                        {
+                          "word": "بقرة",
+                          "img": "animals/cow.png",
+                          "audio": "animals/cow.mp3",
+                        },
+                        {
+                          "word": "حمار",
+                          "img": "animals/danky.png",
+                          "audio": "animals/danky.mp3",
+                        },
+                        {
+                          "word": "كلب",
+                          "img": "animals/dog.png",
+                          "audio": "animals/dog.mp3",
+                        },
+                        {
+                          "word": "بطة",
+                          "img": "animals/duck.png",
+                          "audio": "animals/duck.mp3",
+                        },
+                        {
+                          "word": "ثعلب",
+                          "img": "animals/fox.png",
+                          "audio": "animals/fox.mp3",
+                        },
+                        {
+                          "word": "معز",
+                          "img": "animals/goat.png",
+                          "audio": "animals/goat.mp3",
+                        },
+                        {
+                          "word": "فرس النهر",
+                          "img": "animals/hippo.png",
+                          "audio": "animals/hippo.mp3",
+                        },
+                        {
+                          "word": "حصان",
+                          "img": "animals/horse.png",
+                          "audio": "animals/horse.mp3",
+                        },
+                        {
+                          "word": "أسد",
+                          "img": "animals/lion.png",
+                          "audio": "animals/lion.mp3",
+                        },
+                        {
+                          "word": "سلطعون",
+                          "img": "animals/lobster.png",
+                          "audio": "animals/lobster.mp3",
+                        },
+                        {
+                          "word": "ثور",
+                          "img": "animals/ox.png",
+                          "audio": "animals/ox.mp3",
+                        },
+                        {
+                          "word": "ببغاء",
+                          "img": "animals/parrot.png",
+                          "audio": "animals/parrot.mp3",
+                        },
+                        {
+                          "word": "أرنب",
+                          "img": "animals/rabbit.png",
+                          "audio": "animals/rabbit.mp3",
+                        },
+                        {
+                          "word": "خروف",
+                          "img": "animals/sheep.png",
+                          "audio": "animals/sheep.mp3",
+                        },
+                      ],
                       bgColor: 0xFFF94892,
                       shadowColor: 0xFFE60965,
                     ),
-                    CardWidget(
-                        img: "animals.png",
-                        title: "الحيوانات",
-                        items: [
-                          {
-                            "word": "لاما",
-                            "img": "animals/lama.png",
-                            "audio": "animals/lama.mp3",
-                          },
-                          {
-                            "word": "ثعبان",
-                            "img": "animals/snake.png",
-                            "audio": "animals/snake.mp3",
-                          },
-                          {
-                            "word": "وحيد القرن",
-                            "img": "animals/unicorn.png",
-                            "audio": "animals/unicorn.mp3",
-                          },
-                          {
-                            "word": "أسود",
-                            "img": "animals/shark.png",
-                            "audio": "animals/shark.mp3",
-                          },
-                          {
-                            "word": "ظبي",
-                            "img": "animals/shark.png",
-                            "audio": "animals/elephant.mp3",
-                          },
-                          {
-                            "word": "فيل",
-                            "img": "animals/shark.png",
-                            "audio": "animals/elephant.mp3",
-                          },
-                          {
-                            "word": "قرد",
-                            "img": "animals/shark.png",
-                            "audio": "animals/monkey.mp3",
-                          },
-                          {
-                            "word": "غزال",
-                            "img": "animals/shark.png",
-                            "audio": "animals/deer.mp3",
-                          },
-                          {
-                            "word": "دبّ",
-                            "img": "animals/bear.png",
-                            "audio": "animals/bear.mp3",
-                          },
-                          {
-                            "word": "جمل",
-                            "img": "animals/camel.png",
-                            "audio": "animals/camel.mp3",
-                          },
-                          {
-                            "word": "كتكوت",
-                            "img": "animals/chick.png",
-                            "audio": "animals/chick.mp3",
-                          },
-                          {
-                            "word": "دجاجة",
-                            "img": "animals/chicken.png",
-                            "audio": "animals/chicken.mp3",
-                          },
-                          {
-                            "word": "ديك",
-                            "img": "animals/cock.png",
-                            "audio": "animals/cock.mp3",
-                          },
-                          {
-                            "word": "بقرة",
-                            "img": "animals/cow.png",
-                            "audio": "animals/cow.mp3",
-                          },
-                          {
-                            "word": "حمار",
-                            "img": "animals/danky.png",
-                            "audio": "animals/danky.mp3",
-                          },
-                          {
-                            "word": "كلب",
-                            "img": "animals/dog.png",
-                            "audio": "animals/dog.mp3",
-                          },
-                          {
-                            "word": "بطة",
-                            "img": "animals/duck.png",
-                            "audio": "animals/duck.mp3",
-                          },
-                          {
-                            "word": "ثعلب",
-                            "img": "animals/fox.png",
-                            "audio": "animals/fox.mp3",
-                          },
-                          {
-                            "word": "معز",
-                            "img": "animals/goat.png",
-                            "audio": "animals/goat.mp3",
-                          },
-                          {
-                            "word": "فرس النهر",
-                            "img": "animals/hippo.png",
-                            "audio": "animals/hippo.mp3",
-                          },
-                          {
-                            "word": "حصان",
-                            "img": "animals/horse.png",
-                            "audio": "animals/horse.mp3",
-                          },
-                          {
-                            "word": "أسد",
-                            "img": "animals/lion.png",
-                            "audio": "animals/lion.mp3",
-                          },
-                          {
-                            "word": "سلطعون",
-                            "img": "animals/lobster.png",
-                            "audio": "animals/lobster.mp3",
-                          },
-                          {
-                            "word": "ثور",
-                            "img": "animals/ox.png",
-                            "audio": "animals/ox.mp3",
-                          },
-                          {
-                            "word": "ببغاء",
-                            "img": "animals/parrot.png",
-                            "audio": "animals/parrot.mp3",
-                          },
-                          {
-                            "word": "أرنب",
-                            "img": "animals/rabbit.png",
-                            "audio": "animals/rabbit.mp3",
-                          },
-                          {
-                            "word": "خروف",
-                            "img": "animals/sheep.png",
-                            "audio": "animals/sheep.mp3",
-                          },
-                        ],
-                        bgColor: 0xFFEFD345,
-                        shadowColor: 0xFFBABD42),
                     CardWidget(
                         img: "vegetables&fruits.png",
                         title: " الفواكه و الخضار",
@@ -740,8 +747,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           "audio": "week-days/friday.mp3",
                         },
                       ],
-                      bgColor: 0xFF0AA1DD,
-                      shadowColor: 0xFF2155CD,
+                      bgColor: 0xFF406882,
+                      shadowColor: 0xFF1A374D,
                     )
                   ],
                 ),

@@ -1,7 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:learnabc/utils/Func.dart';
 import 'package:learnabc/widgets/button_widget.dart';
 import 'package:get/get.dart';
 
@@ -38,8 +37,6 @@ class _PreviewState extends State<Preview> {
     await audioPlayer.play(url.path, isLocal: true);
   }
 
-  var randomColor = Color(Funcs.getRandomColor());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,10 +46,10 @@ class _PreviewState extends State<Preview> {
       height: double.infinity,
       width: double.infinity,
       decoration: const BoxDecoration(
-        // color: Color(0xffBDE6F1),
+        color: Color(0xffBDE6F1),
         image: DecorationImage(
           alignment: Alignment.bottomCenter,
-          image: AssetImage("assets/green-earth.png"),
+          image: AssetImage("assets/bgg.png"),
           fit: BoxFit.contain,
         ),
       ),
@@ -74,7 +71,7 @@ class _PreviewState extends State<Preview> {
                     style: TextStyle(
                       fontSize: 40.sp,
                       fontFamily: "Dahka",
-                      color: const Color(0xFF3A3845),
+                      color: const Color(0xff1A132F),
                     ),
                   ),
                 ],
@@ -137,7 +134,7 @@ class _PreviewState extends State<Preview> {
                                         style: TextStyle(
                                             fontFamily: "Madani",
                                             fontSize: 100.sp,
-                                            color: randomColor),
+                                            color: const Color(0xffE60965)),
                                       ),
                                     ),
                                   ),
