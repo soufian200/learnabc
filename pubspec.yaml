@@ -69,6 +69,8 @@ flutter:
     - assets/sounds/numbers/
     - assets/sounds/colors/
     - assets/sounds/animals/
+    - assets/sounds/vegetables&fruits/
+    - assets/vegetables&fruits/
     - assets/animals/
     - assets/colors/
     - assets/numbers/

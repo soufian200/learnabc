@@ -386,11 +386,68 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                         bgColor: 0xFFEFD345,
                         shadowColor: 0xFFBABD42),
-                    // CardWidget(
-                    //     img: "colors.png",
-                    //     title: " الفواكه و الخضار",
-                    //     bgColor: 0xFF83BD75,
-                    //     shadowColor: 0xFF4E944F),
+                    CardWidget(
+                        img: "colors.png",
+                        title: " الفواكه و الخضار",
+                        items: [
+                          {
+                            "word": "تفاح",
+                            "img": "vegetables&fruits/apple.png",
+                            "audio": "vegetables&fruits/apple.mp3",
+                          },
+                          {
+                            "word": "موز",
+                            "img": "vegetables&fruits/banana.png",
+                            "audio": "vegetables&fruits/banana.mp3",
+                          },
+                          {
+                            "word": "كرز",
+                            "img": "vegetables&fruits/cherry.png",
+                            "audio": "vegetables&fruits/cherry.mp3",
+                          },
+                          {
+                            "word": "عنب",
+                            "img": "vegetables&fruits/grape.png",
+                            "audio": "vegetables&fruits/grape.mp3",
+                          },
+                          {
+                            "word": "ليمون",
+                            "img": "vegetables&fruits/lemon.png",
+                            "audio": "vegetables&fruits/lemon.mp3",
+                          },
+                          {
+                            "word": "برتقال",
+                            "img": "vegetables&fruits/orange.png",
+                            "audio": "vegetables&fruits/orange.mp3",
+                          },
+                          {
+                            "word": "إجاص",
+                            "img": "vegetables&fruits/pear.png",
+                            "audio": "vegetables&fruits/pear.mp3",
+                          },
+                          {
+                            "word": "أناناس",
+                            "img": "vegetables&fruits/pineapple.png",
+                            "audio": "vegetables&fruits/pineapple.mp3",
+                          },
+                          {
+                            "word": "رمان",
+                            "img": "vegetables&fruits/pomegranate.png",
+                            "audio": "vegetables&fruits/pomegranate.mp3",
+                          },
+                          {
+                            "word": "فراولة",
+                            "img": "vegetables&fruits/strawberry.png",
+                            "audio": "vegetables&fruits/strawberry.mp3",
+                          },
+                          {
+                            "word": "بطيخ",
+                            "img": "vegetables&fruits/watermelon.png",
+                            "audio": "vegetables&fruits/watermelon.mp3",
+                          },
+                        ],
+                        bgColor: 0xFF83BD75,
+                        shadowColor: 0xFF4E944F),
                     CardWidget(
                       img: "shapes.png",
                       title: "اﻷشكال",
