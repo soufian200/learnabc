@@ -6,6 +6,7 @@ import 'package:launch_review/launch_review.dart';
 import 'package:learnabc/screens/preview.dart';
 import 'package:learnabc/utils/AppRoutes.dart';
 import 'package:learnabc/widgets/card_widget.dart';
+import 'package:share_plus/share_plus.dart';
 
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -42,6 +43,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final String bundleId = 'freegames';
   @override
   void initState() {
     // TODO: implement initState
@@ -78,8 +80,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   print("Rate Us");
                   LaunchReview.launch(
-                    androidAppId: "com.laminn.freegames",
+                    androidAppId: "com.laminn.$bundleId",
                   );
+                },
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.share,
+                  size: 30.h,
+                ),
+                tooltip: 'Share',
+                onPressed: () {
+                  print("Share");
+                  Share.share(
+                      'https://play.google.com/store/apps/details?id=com.laminn.$bundleId');
                 },
               ),
             ],
