@@ -70,7 +70,10 @@ flutter:
     - assets/sounds/colors/
     - assets/sounds/animals/
     - assets/sounds/vegetables&fruits/
+    - assets/sounds/week-days/
+    - assets/week-days/
     - assets/vegetables&fruits/
+    - assets/animals/
     - assets/animals/
     - assets/colors/
     - assets/numbers/

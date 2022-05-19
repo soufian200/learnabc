@@ -386,9 +386,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       shadowColor: 0xFFE60965,
                     ),
                     CardWidget(
-                        img: "colors.png",
+                        img: "animals.png",
                         title: "الحيوانات",
                         items: [
+                          {
+                            "word": "لاما",
+                            "img": "animals/lama.png",
+                            "audio": "animals/lama.mp3",
+                          },
                           {
                             "word": "ثعبان",
                             "img": "animals/snake.png",
@@ -523,7 +528,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         bgColor: 0xFFEFD345,
                         shadowColor: 0xFFBABD42),
                     CardWidget(
-                        img: "colors.png",
+                        img: "vegetables&fruits.png",
                         title: " الفواكه و الخضار",
                         items: [
                           {
@@ -702,6 +707,42 @@ class _MyHomePageState extends State<MyHomePage> {
                       bgColor: 0xFF0AA1DD,
                       shadowColor: 0xFF2155CD,
                     ),
+                    CardWidget(
+                      img: "weekdays.png",
+                      title: "أيام السبوع",
+                      items: [
+                        {
+                          "img": "week-days/saturday.png",
+                          "audio": "week-days/saturday.mp3",
+                        },
+                        {
+                          "img": "week-days/sunday.png",
+                          "audio": "week-days/sunday.mp3",
+                        },
+                        {
+                          "img": "week-days/monday.png",
+                          "audio": "week-days/monday.mp3",
+                        },
+                        {
+                          "img": "week-days/tuesday.png",
+                          "audio": "week-days/tuesday.mp3",
+                        },
+                        {
+                          "img": "week-days/wednesday.png",
+                          "audio": "week-days/wednesday.mp3",
+                        },
+                        {
+                          "img": "week-days/thursday.png",
+                          "audio": "week-days/thursday.mp3",
+                        },
+                        {
+                          "img": "week-days/friday.png",
+                          "audio": "week-days/friday.mp3",
+                        },
+                      ],
+                      bgColor: 0xFF0AA1DD,
+                      shadowColor: 0xFF2155CD,
+                    )
                   ],
                 ),
               )

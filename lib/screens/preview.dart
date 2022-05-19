@@ -105,26 +105,28 @@ class _PreviewState extends State<Preview> {
                           height: 400.h,
                           // color: Colors.amber[100],
                           child: Stack(children: [
-                            Positioned.fill(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  margin: EdgeInsets.only(top: 40.h),
-                                  width: 250.w,
-                                  height: 250.w,
-                                  decoration: BoxDecoration(
-                                    // color: Colors.red,
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/${_items[index % _items.length]["img"]}'),
-                                      fit: BoxFit.contain,
+                            _items[index % _items.length]["img"] == null
+                                ? const SizedBox()
+                                : Positioned.fill(
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Container(
+                                        margin: EdgeInsets.only(top: 40.h),
+                                        width: 250.w,
+                                        height: 250.w,
+                                        decoration: BoxDecoration(
+                                          // color: Colors.red,
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                'assets/${_items[index % _items.length]["img"]}'),
+                                            fit: BoxFit.contain,
+                                          ),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                      ),
                                     ),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10.0)),
                                   ),
-                                ),
-                              ),
-                            ),
                             _items[index % _items.length]["letter"] == null
                                 ? const SizedBox()
                                 : Positioned.fill(
@@ -139,21 +141,23 @@ class _PreviewState extends State<Preview> {
                                       ),
                                     ),
                                   ),
-                            Positioned.fill(
-                              bottom: -10.h,
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  "${_items[index % _items.length]["word"]}",
-                                  textAlign: TextAlign.right,
-                                  style: TextStyle(
-                                    fontSize: 60.sp,
-                                    fontFamily: 'Madani',
-                                    color: const Color(0xff1A132F),
+                            _items[index % _items.length]["word"] == null
+                                ? const SizedBox()
+                                : Positioned.fill(
+                                    bottom: -10.h,
+                                    child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Text(
+                                        "${_items[index % _items.length]["word"]}",
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          fontSize: 60.sp,
+                                          fontFamily: 'Madani',
+                                          color: const Color(0xff1A132F),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
                           ]),
                         ),
                         SizedBox(
@@ -182,7 +186,7 @@ class _PreviewState extends State<Preview> {
                     Button(
                         onTap: () {
                           print("clicked...................");
-                          play(_items[_currentPage]["audio"]);
+                          play(_items[_currentPage % _items.length]["audio"]);
                         },
                         img: "buttons/volume.png",
                         size: 110.w),
