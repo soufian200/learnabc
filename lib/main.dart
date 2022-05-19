@@ -61,20 +61,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List items = [
-    {
-      "title": "1",
-    },
-    {
-      "title": "2",
-    },
-    {
-      "title": "1",
-    },
-    {
-      "title": "2",
-    },
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,6 +111,156 @@ class _MyHomePageState extends State<MyHomePage> {
                             "word": "تمساح",
                             "img": "animals/crocodile.png",
                             "audio": "letters/3.mp3",
+                          },
+                          {
+                            "letter": "ث",
+                            "word": "ثور",
+                            "img": "animals/ox.png",
+                            "audio": "letters/4.mp3",
+                          },
+                          {
+                            "letter": "ج",
+                            "word": "جمل",
+                            "img": "animals/camel.png",
+                            "audio": "letters/5.mp3",
+                          },
+                          {
+                            "letter": "ح",
+                            "word": "حصان",
+                            "img": "animals/horse.png",
+                            "audio": "letters/6.mp3",
+                          },
+                          {
+                            "letter": "خ",
+                            "word": "خروف",
+                            "img": "animals/sheep.png",
+                            "audio": "letters/7.mp3",
+                          },
+                          {
+                            "letter": "د",
+                            "word": "دب",
+                            "img": "animals/bear.png",
+                            "audio": "letters/8.mp3",
+                          },
+                          {
+                            "letter": "ذ",
+                            "word": "ذئب",
+                            "img": "animals/wolf.png",
+                            "audio": "letters/9.mp3",
+                          },
+                          {
+                            "letter": "ر",
+                            "word": "راكون",
+                            "img": "animals/wolf.png",
+                            "audio": "letters/10.mp3",
+                          },
+                          {
+                            "letter": "ز",
+                            "word": "زرافة",
+                            "img": "animals/giraffe.png",
+                            "audio": "letters/11.mp3",
+                          },
+                          {
+                            "letter": "س",
+                            "word": "سلحفاة",
+                            "img": "animals/turtle.png",
+                            "audio": "letters/12.mp3",
+                          },
+                          {
+                            "letter": "ش",
+                            "word": "شبل",
+                            "img": "animals/cub.png",
+                            "audio": "letters/13.mp3",
+                          },
+                          {
+                            "letter": "ص",
+                            "word": "صوص",
+                            "img": "animals/sauce.png",
+                            "audio": "letters/14.mp3",
+                          },
+                          {
+                            "letter": "ض",
+                            "word": "ضفدع",
+                            "img": "animals/frog.png",
+                            "audio": "letters/15.mp3",
+                          },
+                          {
+                            "letter": "ط",
+                            "word": "طير",
+                            "img": "animals/bird.png",
+                            "audio": "letters/16.mp3",
+                          },
+                          {
+                            "letter": "ظ",
+                            "word": "ظبي",
+                            "img": "animals/antelope.png",
+                            "audio": "letters/17.mp3",
+                          },
+                          {
+                            "letter": "ع",
+                            "word": "عنكبوت",
+                            "img": "animals/wolf.png",
+                            "audio": "letters/18.mp3",
+                          },
+                          {
+                            "letter": "غ",
+                            "word": "غراب",
+                            "img": "animals/wolf.png",
+                            "audio": "letters/19.mp3",
+                          },
+                          {
+                            "letter": "ف",
+                            "word": "فيل",
+                            "img": "animals/wolf.png",
+                            "audio": "letters/20.mp3",
+                          },
+                          {
+                            "letter": "ق",
+                            "word": "قرش",
+                            "img": "animals/wolf.png",
+                            "audio": "letters/21.mp3",
+                          },
+                          {
+                            "letter": "ك",
+                            "word": "كلب",
+                            "img": "animals/dog.png",
+                            "audio": "letters/22.mp3",
+                          },
+                          {
+                            "letter": "ل",
+                            "word": "لاما",
+                            "img": "animals/lama.png",
+                            "audio": "letters/23.mp3",
+                          },
+                          {
+                            "letter": "م",
+                            "word": "معز",
+                            "img": "animals/goat.png",
+                            "audio": "letters/24.mp3",
+                          },
+                          {
+                            "letter": "ن",
+                            "word": "نعامة",
+                            "img": "animals/ostrich.png",
+                            "audio": "letters/25.mp3",
+                          },
+                          {
+                            "letter": "ه",
+                            "word": "هر",
+                            "img": "animals/cat.png",
+                            "audio": "letters/26.mp3",
+                          },
+                          {
+                            "letter": "و",
+                            "word": "وحيد القرن",
+                            "img": "animals/unicorn.png",
+                            "audio": "letters/27.mp3",
+                          },
+                          {
+                            "letter": "ي",
+                            "word": "يمامة",
+                            "img": "animals/dove.png",
+                            "audio": "letters/28.mp3",
                           },
                         ],
                         bgColor: 0xFF83BD75,
