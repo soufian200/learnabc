@@ -64,9 +64,9 @@ class _CardWidgetState extends State<CardWidget> {
   @override
   Widget build(BuildContext context) {
     _onTap() {
-      if (_isInterstitialAdLoaded && AdsManager.isAdsEnabled) {
-        _interstitialAd.show();
-      }
+      // if (_isInterstitialAdLoaded && AdsManager.isAdsEnabled) {
+      //   _interstitialAd.show();
+      // }
 
       Get.toNamed(AppRoutes.preview,
           arguments: {"title": widget.title, "items": widget.items});

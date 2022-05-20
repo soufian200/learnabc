@@ -21,13 +21,14 @@ class _PreviewState extends State<Preview> {
   late List _items;
   late bool isConnected = false;
 
-  late InterstitialAd _interstitialAd;
+  var _interstitialAd;
   bool _isInterstitialAdLoaded = false;
 
-  late Timer _timerForInter;
+  late Timer _timerForInter = Timer(const Duration(seconds: 5), () {});
 
   late BannerAd _bannerAd;
   bool _isBannerAdLoaded = false;
+  int numOfPlayed = 0;
 
   int _currentPage = 0;
 
@@ -55,13 +56,17 @@ class _PreviewState extends State<Preview> {
       setState(() {
         isConnected = true;
       });
+      if (_items.isNotEmpty && numOfPlayed == 0) {
+        play(_items[0]["audio"]);
+        numOfPlayed++;
+      }
     }
   }
 
   ///
   /// Load Banner Ads
   ///  */
-  void loadBanner() {
+  void loadBannerAd() {
     _bannerAd = BannerAd(
       adUnitId: AdsManager.bannerAdUnitId,
       request: const AdRequest(),
@@ -109,33 +114,36 @@ class _PreviewState extends State<Preview> {
 
     checkConnection();
 
-    if (_items.isNotEmpty) play(_items[0]["audio"]);
-
     super.initState();
 
     // Load Ads
     if (AdsManager.isAdsEnabled) {
-      loadBanner();
+      loadBannerAd();
+
+      // Load Interstitial Ad Every Amount Of Seconds
+      _timerForInter = Timer.periodic(
+          const Duration(seconds: AdsManager.timeToShowAd), (result) {
+        checkConnection();
+        if (!isConnected) return;
+
+        _loadIntertitialAd();
+        if (_isInterstitialAdLoaded) {
+          _interstitialAd.show();
+        }
+      });
     }
-
-    _timerForInter = Timer.periodic(const Duration(seconds: 15), (result) {
-      checkConnection();
-      _loadIntertitialAd();
-
-      if (_isInterstitialAdLoaded && AdsManager.isAdsEnabled) {
-        _interstitialAd.show();
-      }
-    });
   }
 
   @override
   void dispose() {
     if (AdsManager.isAdsEnabled) {
       _bannerAd.dispose();
-    }
 
-    _timerForInter.cancel();
-    _interstitialAd.dispose();
+      _timerForInter.cancel();
+      if (_interstitialAd != null) {
+        _interstitialAd.dispose();
+      }
+    }
 
     super.dispose();
   }
@@ -276,7 +284,7 @@ class _PreviewState extends State<Preview> {
                               _items[index % _items.length]["word"] == null
                                   ? const SizedBox()
                                   : Positioned.fill(
-                                      bottom: -8.h,
+                                      // bottom: 0.h,
                                       child: Align(
                                         alignment: Alignment.bottomCenter,
                                         child: Text(

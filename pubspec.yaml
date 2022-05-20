@@ -83,7 +83,6 @@ flutter:
     - assets/colors/
     - assets/numbers/
     - assets/buttons/
-    - assets/letters/
     - assets/shapes/
   #   - images/a_dot_ham.jpeg
 
