@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:launch_review/launch_review.dart';
+import 'package:learnabc/AdsManager.dart';
 import 'package:learnabc/screens/preview.dart';
 import 'package:learnabc/utils/AppRoutes.dart';
 import 'package:learnabc/widgets/card_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 void main() {
-  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   systemNavigationBarColor: Colors.green, // navigation bar color
-  //   statusBarColor: Colors.green, // status bar color
-  // ));
+  if (AdsManager.isAdsEnabled) {
+    WidgetsFlutterBinding.ensureInitialized();
+    MobileAds.instance.initialize();
+  }
 
   runApp(ScreenUtilInit(
       designSize: const Size(414, 736),
@@ -44,6 +46,28 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final String bundleId = 'learnabc';
+
+  late BannerAd _bannerAd;
+  bool _isBannerAdLoaded = false;
+
+  void loadBanner() {
+    _bannerAd = BannerAd(
+      adUnitId: AdsManager.bannerAdUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(onAdLoaded: (ad) {
+        setState(() {
+          _isBannerAdLoaded = true;
+        });
+      }, onAdFailedToLoad: (ad, error) {
+        ad.dispose();
+
+        print('Ad load failed (code=${error.code} message=${error.message})');
+      }),
+    );
+    _bannerAd.load();
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -53,6 +77,19 @@ class _MyHomePageState extends State<MyHomePage> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    // Load Ads
+    if (AdsManager.isAdsEnabled) {
+      loadBanner();
+    }
+  }
+
+  @override
+  void dispose() {
+    if (AdsManager.isAdsEnabled) {
+      _bannerAd.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -60,6 +97,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+          bottomNavigationBar: _isBannerAdLoaded && AdsManager.isAdsEnabled
+              ? Container(
+                  color: Colors.green[400],
+                  height: _bannerAd.size.height.toDouble(),
+                  width: _bannerAd.size.width.toDouble(),
+                  child: AdWidget(ad: _bannerAd),
+                )
+              : const SizedBox(),
           appBar: AppBar(
             title: Text(
               "تعليم اﻷطفال",
@@ -122,11 +167,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: EdgeInsets.all(10.w),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
+                        children: [
                           CardWidget(
                               img: "letters.png",
                               title: "الحروف",
-                              items: [
+                              items: const [
                                 {
                                   "letter": "أ",
                                   "word": "أرنب",
@@ -301,7 +346,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                               img: "numbers.png",
                               title: "اﻷعداد",
-                              items: [
+                              items: const [
                                 {
                                   "word": "واحد",
                                   "img": "numbers/1.png",
@@ -358,7 +403,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                             img: "colors.png",
                             title: "اﻷلوان",
-                            items: [
+                            items: const [
                               {
                                 "word": "أسود",
                                 "img": "colors/black.png",
@@ -421,7 +466,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                             img: "animals.png",
                             title: "الحيوانات",
-                            items: [
+                            items: const [
                               {
                                 "word": "لاما",
                                 "img": "animals/lama.png",
@@ -564,7 +609,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                               img: "vegetables&fruits.png",
                               title: " الفواكه و الخضار",
-                              items: [
+                              items: const [
                                 {
                                   "word": "تفاح",
                                   "img": "vegetables&fruits/apple.png",
@@ -686,7 +731,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                             img: "shapes.png",
                             title: "اﻷشكال",
-                            items: [
+                            items: const [
                               {
                                 "word": "مثلث",
                                 "img": "shapes/triangle.png",
@@ -744,7 +789,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                             img: "weekdays.png",
                             title: "أيام السبوع",
-                            items: [
+                            items: const [
                               {
                                 "img": "week-days/saturday.png",
                                 "audio": "week-days/saturday.mp3",
