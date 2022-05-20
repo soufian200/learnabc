@@ -40,6 +40,7 @@ dependencies:
   launch_review: ^3.0.1
   share_plus: ^4.0.4
   rename: ^2.0.1
+  connectivity_plus: ^2.3.0
 
 dev_dependencies:
   flutter_test:
