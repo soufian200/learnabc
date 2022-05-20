@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Button extends StatelessWidget {
   final Function onTap;
@@ -12,24 +11,24 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: BorderRadius.all(Radius.circular(55.r)),
+      borderRadius: BorderRadius.all(Radius.circular(size / 2)),
+      color: Colors.white,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
           onTap();
         },
         child: Ink(
-          child: Container(
-              height: size,
-              width: size,
-              decoration: BoxDecoration(
-                // color: Colors.red,
-                image: DecorationImage(
-                  image: AssetImage("assets/$img"),
-                  fit: BoxFit.cover,
-                ),
-              )),
-        ),
+            height: size,
+            width: size,
+            decoration: BoxDecoration(
+              // color: Colors.red,
+              image: DecorationImage(
+                image: AssetImage("assets/$img"),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(size / 2)),
+            )),
       ),
     );
   }

@@ -10,8 +10,8 @@ import 'package:share_plus/share_plus.dart';
 
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   systemNavigationBarColor: Color(0xff82954B), // navigation bar color
-  //   statusBarColor: Color(0xff82954B), // status bar color
+  //   systemNavigationBarColor: Colors.green, // navigation bar color
+  //   statusBarColor: Colors.green, // status bar color
   // ));
 
   runApp(ScreenUtilInit(
@@ -64,10 +64,11 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text(
               "تعليم اﻷطفال",
               style: TextStyle(
-                fontSize: 25.sp,
+                fontSize: 22.sp,
                 fontFamily: "Madani",
               ),
             ),
+            toolbarHeight: 56.h,
             elevation: 0,
             backgroundColor: Colors.green,
             actions: [
@@ -78,7 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 tooltip: 'Rate Us',
                 onPressed: () {
-                  print("Rate Us");
                   LaunchReview.launch(
                     androidAppId: "com.laminn.$bundleId",
                   );
@@ -91,7 +91,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 tooltip: 'Share',
                 onPressed: () {
-                  print("Share");
                   Share.share(
                       'https://play.google.com/store/apps/details?id=com.laminn.$bundleId');
                 },
@@ -116,11 +115,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     //     fontWeight: FontWeight.bold,
                     //   ),
                     // ),
-                    const SizedBox(
-                      height: 15.0,
+                    SizedBox(
+                      height: 10.h,
                     ),
                     Container(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: EdgeInsets.all(10.w),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: const [
@@ -185,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 {
                                   "letter": "ر",
                                   "word": "راكون",
-                                  "img": "animals/wolf.png",
+                                  "img": "animals/raccoon.png",
                                   "audio": "letters/10.mp3",
                                 },
                                 {
@@ -233,25 +232,25 @@ class _MyHomePageState extends State<MyHomePage> {
                                 {
                                   "letter": "ع",
                                   "word": "عنكبوت",
-                                  "img": "animals/wolf.png",
+                                  "img": "animals/spider.png",
                                   "audio": "letters/18.mp3",
                                 },
                                 {
                                   "letter": "غ",
                                   "word": "غراب",
-                                  "img": "animals/wolf.png",
+                                  "img": "animals/crow.png",
                                   "audio": "letters/19.mp3",
                                 },
                                 {
                                   "letter": "ف",
                                   "word": "فيل",
-                                  "img": "animals/wolf.png",
+                                  "img": "animals/elephant.png",
                                   "audio": "letters/20.mp3",
                                 },
                                 {
                                   "letter": "ق",
                                   "word": "قرش",
-                                  "img": "animals/wolf.png",
+                                  "img": "animals/shark.png",
                                   "audio": "letters/21.mp3",
                                 },
                                 {
@@ -293,7 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 {
                                   "letter": "ي",
                                   "word": "يمامة",
-                                  "img": "animals/dov.png",
+                                  "img": "animals/dove.png",
                                   "audio": "letters/28.mp3",
                                 },
                               ],

@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learnabc/widgets/button_widget.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,11 @@ class _PreviewState extends State<Preview> {
   late List _items;
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     var data = Get.arguments;
     setState(() {
       _title = data["title"];
@@ -42,7 +48,7 @@ class _PreviewState extends State<Preview> {
     return Scaffold(
         body: SafeArea(
             child: Container(
-      padding: const EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(10.r),
       height: double.infinity,
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -53,158 +59,140 @@ class _PreviewState extends State<Preview> {
           fit: BoxFit.contain,
         ),
       ),
-      child: Container(
-        child: Column(
-          children: [
-            Container(
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Button(
+                  onTap: () {
+                    Get.back();
+                  },
+                  img: "buttons/backword.png",
+                  size: 60.w),
+              Text(
+                _title,
+                style: TextStyle(
+                  fontSize: 40.sp,
+                  fontFamily: "Dahka",
+                  color: const Color(0xff1A132F),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          SizedBox(
+            // color: Colors.red,
+            width: 320.w,
+            height: 380.h,
+            child: PageView.builder(
+                scrollDirection: Axis.horizontal,
+                controller: pageController,
+                onPageChanged: (index) {
+                  play(_items[index % _items.length]["audio"]);
+                  setState(() {
+                    _currentPage = index;
+                  });
+                },
+                reverse: true,
+                itemBuilder: (context, index) {
+                  return Stack(children: [
+                    _items[index % _items.length]["img"] == null
+                        ? const SizedBox()
+                        : Positioned.fill(
+                            child: Align(
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                margin: EdgeInsets.only(top: 25.h),
+                                width: 250.r,
+                                height: 250.r,
+                                decoration: BoxDecoration(
+                                  // color: Colors.purple,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/${_items[index % _items.length]["img"]}'),
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                    _items[index % _items.length]["letter"] == null
+                        ? const SizedBox()
+                        : Positioned.fill(
+                            top: -12.h,
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                "${_items[index % _items.length]["letter"]}",
+                                style: TextStyle(
+                                    fontFamily: "Madani",
+                                    fontSize: 80.sp,
+                                    color: const Color(0xffE60965)),
+                              ),
+                            ),
+                          ),
+                    _items[index % _items.length]["word"] == null
+                        ? const SizedBox()
+                        : Positioned.fill(
+                            bottom: -8.h,
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                "${_items[index % _items.length]["word"]}",
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  fontSize: 60.sp,
+                                  fontFamily: 'Madani',
+                                  color: const Color(0xff1A132F),
+                                ),
+                              ),
+                            ),
+                          ),
+                  ]);
+                }),
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          Center(
+            child: SizedBox(
+              width: 300.w,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Button(
                       onTap: () {
-                        Get.back();
+                        pageController.animateToPage(_currentPage + 1,
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeIn);
                       },
                       img: "buttons/backword.png",
-                      size: 60.w),
-                  Text(
-                    _title,
-                    style: TextStyle(
-                      fontSize: 40.sp,
-                      fontFamily: "Dahka",
-                      color: const Color(0xff1A132F),
-                    ),
-                  ),
+                      size: 76.w),
+                  Button(
+                      onTap: () {
+                        play(_items[_currentPage % _items.length]["audio"]);
+                      },
+                      img: "buttons/volume.png",
+                      size: 106.w),
+                  Button(
+                      onTap: () {
+                        if (_currentPage > 0) {
+                          pageController.animateToPage(_currentPage - 1,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeIn);
+                        }
+                      },
+                      img: "buttons/forword.png",
+                      size: 76.w),
                 ],
               ),
             ),
-            SizedBox(
-              height: 20.h,
-            ),
-            SizedBox(
-              height: 440.h,
-              width: double.infinity,
-              child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  controller: pageController,
-                  onPageChanged: (index) {
-                    play(_items[index % _items.length]["audio"]);
-                    setState(() {
-                      _currentPage = index;
-                    });
-                  },
-                  // itemCount: _items.length,
-                  reverse: true,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        SizedBox(
-                          width: 300.w,
-                          height: 400.h,
-                          // color: Colors.amber[100],
-                          child: Stack(children: [
-                            _items[index % _items.length]["img"] == null
-                                ? const SizedBox()
-                                : Positioned.fill(
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Container(
-                                        margin: EdgeInsets.only(top: 40.h),
-                                        width: 250.w,
-                                        height: 250.w,
-                                        decoration: BoxDecoration(
-                                          // color: Colors.red,
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/${_items[index % _items.length]["img"]}'),
-                                            fit: BoxFit.contain,
-                                          ),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                            _items[index % _items.length]["letter"] == null
-                                ? const SizedBox()
-                                : Positioned.fill(
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: Text(
-                                        "${_items[index % _items.length]["letter"]}",
-                                        style: TextStyle(
-                                            fontFamily: "Madani",
-                                            fontSize: 100.sp,
-                                            color: const Color(0xffE60965)),
-                                      ),
-                                    ),
-                                  ),
-                            _items[index % _items.length]["word"] == null
-                                ? const SizedBox()
-                                : Positioned.fill(
-                                    bottom: -10.h,
-                                    child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Text(
-                                        "${_items[index % _items.length]["word"]}",
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          fontSize: 60.sp,
-                                          fontFamily: 'Madani',
-                                          color: const Color(0xff1A132F),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                          ]),
-                        ),
-                        SizedBox(
-                          height: 40.h,
-                        ),
-                      ],
-                    );
-                  }),
-            ),
-            Center(
-              child: SizedBox(
-                width: 300.w,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Button(
-                        onTap: () {
-                          print("backword - clicked...................");
-                          print(_currentPage + 1);
-                          pageController.animateToPage(_currentPage + 1,
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.easeIn);
-                        },
-                        img: "buttons/backword.png",
-                        size: 80.w),
-                    Button(
-                        onTap: () {
-                          print("clicked...................");
-                          play(_items[_currentPage % _items.length]["audio"]);
-                        },
-                        img: "buttons/volume.png",
-                        size: 110.w),
-                    Button(
-                        onTap: () {
-                          print("forword - clicked...................");
-                          if (_currentPage > 0) {
-                            print(_currentPage - 1);
-                            pageController.animateToPage(_currentPage - 1,
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.easeIn);
-                          }
-                        },
-                        img: "buttons/forword.png",
-                        size: 80.w),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     )));
   }

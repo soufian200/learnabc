@@ -36,7 +36,7 @@ class CardWidget extends StatelessWidget {
             },
             child: Ink(
               width: double.infinity,
-              height: 150.h,
+              height: 165.h,
               child: Container(
                 padding: EdgeInsets.all(10.w),
                 width: double.infinity,
@@ -56,20 +56,8 @@ class CardWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: 150.w,
-                      height: 150.w,
-                      decoration: BoxDecoration(
-                        // color: Colors.lime[100],
-                        image: DecorationImage(
-                          image: AssetImage('assets/$img'),
-                          fit: BoxFit.contain,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                      ),
-                    ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -86,9 +74,23 @@ class CardWidget extends StatelessWidget {
                               _onTap();
                             },
                             img: "buttons/forword.png",
-                            size: 60.w),
+                            size: 56.w),
                       ],
-                    )
+                    ),
+                    Container(
+                      width: 150.r,
+                      height: 150.r,
+                      decoration: BoxDecoration(
+                        // color: Colors.lime[100],
+                        image: DecorationImage(
+                          image: AssetImage('assets/$img'),
+                          fit: BoxFit.contain,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.r),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
