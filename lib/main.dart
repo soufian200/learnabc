@@ -152,14 +152,6 @@ class _MyHomePageState extends State<MyHomePage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // const Text(
-                    //   "Learn Kids",
-                    //   textAlign: TextAlign.center,
-                    //   style: TextStyle(
-                    //     fontSize: 35.0,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
                     SizedBox(
                       height: 10.h,
                     ),
@@ -167,11 +159,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: EdgeInsets.all(10.w),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: [
+                        children: const [
                           CardWidget(
                               img: "letters.png",
                               title: "الحروف",
-                              items: const [
+                              items: [
                                 {
                                   "letter": "أ",
                                   "word": "أرنب",
@@ -346,7 +338,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                               img: "numbers.png",
                               title: "اﻷعداد",
-                              items: const [
+                              items: [
                                 {
                                   "word": "واحد",
                                   "img": "numbers/1.png",
@@ -403,7 +395,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                             img: "colors.png",
                             title: "اﻷلوان",
-                            items: const [
+                            items: [
                               {
                                 "word": "أسود",
                                 "img": "colors/black.png",
@@ -466,16 +458,51 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                             img: "animals.png",
                             title: "الحيوانات",
-                            items: const [
+                            items: [
+                              {
+                                "word": "ضفدع",
+                                "img": "animals/frog.png",
+                                "audio": "animals/frog.mp3",
+                              },
+                              {
+                                "word": "ذئب",
+                                "img": "animals/wolf.png",
+                                "audio": "animals/wolf.mp3",
+                              },
+                              {
+                                "word": "زرافة",
+                                "img": "animals/giraffe.png",
+                                "audio": "animals/giraffe.mp3",
+                              },
+                              {
+                                "word": "سلحفاة",
+                                "img": "animals/turtle.png",
+                                "audio": "animals/turtle.mp3",
+                              },
+                              {
+                                "word": "شبل",
+                                "img": "animals/cub.png",
+                                "audio": "animals/cub.mp3",
+                              },
+                              {
+                                "word": "راكون",
+                                "img": "animals/raccoon.png",
+                                "audio": "animals/raccoon.mp3",
+                              },
+                              {
+                                "word": "جمل",
+                                "img": "animals/camel.png",
+                                "audio": "animals/camel.mp3",
+                              },
+                              {
+                                "word": "فيل",
+                                "img": "animals/elephant.png",
+                                "audio": "animals/elephant.mp3",
+                              },
                               {
                                 "word": "لاما",
                                 "img": "animals/lama.png",
                                 "audio": "animals/lama.mp3",
-                              },
-                              {
-                                "word": "ثعبان",
-                                "img": "animals/snake.png",
-                                "audio": "animals/snake.mp3",
                               },
                               {
                                 "word": "وحيد القرن",
@@ -483,39 +510,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                 "audio": "animals/unicorn.mp3",
                               },
                               {
-                                "word": "أسود",
-                                "img": "animals/shark.png",
-                                "audio": "animals/shark.mp3",
-                              },
-                              {
                                 "word": "ظبي",
-                                "img": "animals/shark.png",
-                                "audio": "animals/elephant.mp3",
+                                "img": "animals/antelope.png",
+                                "audio": "animals/antelope.mp3",
                               },
                               {
-                                "word": "فيل",
-                                "img": "animals/shark.png",
-                                "audio": "animals/elephant.mp3",
+                                "word": "ثعبان",
+                                "img": "animals/snake.png",
+                                "audio": "animals/snake.mp3",
                               },
                               {
-                                "word": "قرد",
-                                "img": "animals/shark.png",
-                                "audio": "animals/monkey.mp3",
-                              },
-                              {
-                                "word": "غزال",
-                                "img": "animals/shark.png",
-                                "audio": "animals/deer.mp3",
-                              },
-                              {
-                                "word": "دبّ",
+                                "word": "دب",
                                 "img": "animals/bear.png",
                                 "audio": "animals/bear.mp3",
-                              },
-                              {
-                                "word": "جمل",
-                                "img": "animals/camel.png",
-                                "audio": "animals/camel.mp3",
                               },
                               {
                                 "word": "كتكوت",
@@ -578,7 +585,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 "audio": "animals/lion.mp3",
                               },
                               {
-                                "word": "سلطعون",
+                                "word": "سرطان البحر",
                                 "img": "animals/lobster.png",
                                 "audio": "animals/lobster.mp3",
                               },
@@ -609,7 +616,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                               img: "vegetables&fruits.png",
                               title: " الفواكه و الخضار",
-                              items: const [
+                              items: [
                                 {
                                   "word": "تفاح",
                                   "img": "vegetables&fruits/apple.png",
@@ -731,7 +738,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                             img: "shapes.png",
                             title: "اﻷشكال",
-                            items: const [
+                            items: [
                               {
                                 "word": "مثلث",
                                 "img": "shapes/triangle.png",
@@ -773,14 +780,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 "audio": "shapes/hexagon.mp3",
                               },
                               {
-                                "word": "نجمة",
-                                "img": "shapes/star.png",
-                                "audio": "shapes/star.mp3",
-                              },
-                              {
                                 "word": "قلب",
                                 "img": "shapes/heart.png",
                                 "audio": "shapes/heart.mp3",
+                              },
+                              {
+                                "word": "نجمة",
+                                "img": "shapes/star.png",
+                                "audio": "shapes/star.mp3",
                               },
                             ],
                             bgColor: 0xFF0AA1DD,
@@ -789,7 +796,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           CardWidget(
                             img: "weekdays.png",
                             title: "أيام السبوع",
-                            items: const [
+                            items: [
                               {
                                 "img": "week-days/saturday.png",
                                 "audio": "week-days/saturday.mp3",
