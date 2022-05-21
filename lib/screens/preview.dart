@@ -249,10 +249,10 @@ class _PreviewState extends State<Preview> {
                               _items[index % _items.length]["img"] == null
                                   ? const SizedBox()
                                   : Positioned.fill(
+                                      top: 45.h,
                                       child: Align(
                                         alignment: Alignment.topCenter,
                                         child: Container(
-                                          margin: EdgeInsets.only(top: 25.h),
                                           width: 250.r,
                                           height: 250.r,
                                           decoration: BoxDecoration(
