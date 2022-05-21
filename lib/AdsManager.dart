@@ -1,8 +1,8 @@
 import 'dart:io';
 
 class AdsManager {
-  static const bool isAdsEnabled = false;
-  static const bool _testMode = true;
+  static const bool isAdsEnabled = true;
+  static const bool _testMode = false;
 
   static const timeToShowAd = 22;
 
