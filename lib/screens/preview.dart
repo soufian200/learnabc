@@ -157,7 +157,7 @@ class _PreviewState extends State<Preview> {
     return Scaffold(
         bottomNavigationBar: _isBannerAdLoaded && AdsManager.isAdsEnabled
             ? Container(
-                color: Colors.green[400],
+                alignment: Alignment.center,
                 height: _bannerAd.size.height.toDouble(),
                 width: _bannerAd.size.width.toDouble(),
                 child: AdWidget(ad: _bannerAd),

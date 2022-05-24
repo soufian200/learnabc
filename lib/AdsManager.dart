@@ -9,7 +9,7 @@ class AdsManager {
   /// AppID
   static String get appId {
     if (Platform.isAndroid) {
-      return "ca-app-pub-xxx";
+      return "ca-app-pub-3465655585438996~3497529715";
     } else {
       throw UnsupportedError("Unsuported Platform");
     }
@@ -25,7 +25,7 @@ class AdsManager {
     } else {
       // Production
       if (Platform.isAndroid) {
-        return "ca-app-pub-xx";
+        return "ca-app-pub-3465655585438996/4943554894";
       }
     }
     throw UnsupportedError("Unsupported platform");
