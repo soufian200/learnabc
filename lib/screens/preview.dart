@@ -4,10 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:learnabc/AdsManager.dart';
+import 'package:learnabc/controllers/interstitial_controller.dart';
 import 'package:learnabc/widgets/button_widget.dart';
 import 'package:get/get.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'dart:async';
 
 class Preview extends StatefulWidget {
   const Preview({Key? key}) : super(key: key);
@@ -19,12 +18,6 @@ class Preview extends StatefulWidget {
 class _PreviewState extends State<Preview> {
   late String _title;
   late List _items;
-  late bool isConnected = false;
-
-  var _interstitialAd;
-  bool _isInterstitialAdLoaded = false;
-
-  late Timer _timerForInter = Timer(const Duration(seconds: 5), () {});
 
   late BannerAd _bannerAd;
   bool _isBannerAdLoaded = false;
@@ -42,25 +35,6 @@ class _PreviewState extends State<Preview> {
   play(String audio) async {
     final url = await player.load(audio);
     await audioPlayer.play(url.path, isLocal: true);
-  }
-
-  ///
-  /// Check mobile connection
-  void checkConnection() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
-      setState(() {
-        isConnected = false;
-      });
-    } else {
-      setState(() {
-        isConnected = true;
-      });
-      if (_items.isNotEmpty && numOfPlayed == 0) {
-        play(_items[0]["audio"]);
-        numOfPlayed++;
-      }
-    }
   }
 
   ///
@@ -83,54 +57,40 @@ class _PreviewState extends State<Preview> {
     _bannerAd.load();
   }
 
-  _loadIntertitialAd() {
-    InterstitialAd.load(
-        adUnitId: AdsManager.intersitialAdUnitId,
-        request: const AdRequest(),
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (InterstitialAd ad) {
-            // Keep a reference to the ad so you can show it later.
-            _interstitialAd = ad;
-            _isInterstitialAdLoaded = true;
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('InterstitialAd failed to load: $error');
-          },
-        ));
+  /// load interstital ad
+  void loadInterAd() {
+    ///
+    if (AdsManager.isAdsEnabled) {
+      late InterstitialAdController interstitialAdController = Get.find();
+      interstitialAdController.show();
+    }
   }
 
   @override
   void initState() {
+    super.initState();
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
 
+    /// change navbar bg color
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        systemNavigationBarColor: Color(0xff4E944F) // navigation bar color
+        ));
+
+    ///
     var data = Get.arguments;
     setState(() {
       _title = data["title"];
       _items = data["items"];
     });
+    play(_items[0]["audio"]);
 
-    checkConnection();
-
-    super.initState();
-
-    // Load Ads
+    /// Load Ads
     if (AdsManager.isAdsEnabled) {
       loadBannerAd();
-
-      // Load Interstitial Ad Every Amount Of Seconds
-      _timerForInter = Timer.periodic(
-          const Duration(seconds: AdsManager.timeToShowAd), (result) {
-        checkConnection();
-        if (!isConnected) return;
-
-        _loadIntertitialAd();
-        if (_isInterstitialAdLoaded) {
-          _interstitialAd.show();
-        }
-      });
     }
   }
 
@@ -138,11 +98,6 @@ class _PreviewState extends State<Preview> {
   void dispose() {
     if (AdsManager.isAdsEnabled) {
       _bannerAd.dispose();
-
-      _timerForInter.cancel();
-      if (_interstitialAd != null) {
-        _interstitialAd.dispose();
-      }
     }
 
     super.dispose();
@@ -176,174 +131,153 @@ class _PreviewState extends State<Preview> {
               fit: BoxFit.contain,
             ),
           ),
-          child: !isConnected
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Button(
+                      onTap: () {
+                        Get.back();
+                      },
+                      img: "buttons/backword.png",
+                      size: 60.w),
+                  Text(
+                    _title,
+                    style: TextStyle(
+                      fontSize: 40.sp,
+                      fontFamily: "Dahka",
+                      color: const Color(0xff1A132F),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              SizedBox(
+                // color: Colors.red,
+                width: 320.w,
+                height: 380.h,
+                child: PageView.builder(
+                    scrollDirection: Axis.horizontal,
+                    controller: pageController,
+                    onPageChanged: (index) {
+                      play(_items[index % _items.length]["audio"]);
+                      setState(() {
+                        _currentPage = index;
+                      });
+                    },
+                    reverse: true,
+                    itemBuilder: (context, index) {
+                      return Stack(children: [
+                        _items[index % _items.length]["img"] == null
+                            ? const SizedBox()
+                            : Positioned.fill(
+                                top: 45.h,
+                                child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Container(
+                                    width: 250.r,
+                                    height: 250.r,
+                                    decoration: BoxDecoration(
+                                      // color: Colors.purple,
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/${_items[index % _items.length]["img"]}'),
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                        _items[index % _items.length]["letter"] == null
+                            ? const SizedBox()
+                            : Positioned.fill(
+                                top: -12.h,
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    "${_items[index % _items.length]["letter"]}",
+                                    style: TextStyle(
+                                        fontFamily: "Madani",
+                                        fontSize: 80.sp,
+                                        color: const Color(0xffE60965)),
+                                  ),
+                                ),
+                              ),
+                        _items[index % _items.length]["word"] == null
+                            ? const SizedBox()
+                            : Positioned.fill(
+                                // bottom: 0.h,
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Text(
+                                    "${_items[index % _items.length]["word"]}",
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      fontSize: 60.sp,
+                                      fontFamily: 'Madani',
+                                      color: const Color(0xff1A132F),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ]);
+                    }),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Center(
+                child: SizedBox(
+                  width: 300.w,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        Icons.wifi_off_outlined,
-                        size: 80.sp,
-                      ),
-                      Text("لا توجد شبكة",
-                          style: TextStyle(
-                            fontFamily: "Madani",
-                            fontSize: 16.sp,
-                          )),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            checkConnection();
+                      Button(
+                          onTap: () {
+                            ///
+                            loadInterAd();
+
+                            ///
+                            pageController.animateToPage(_currentPage + 1,
+                                duration: const Duration(milliseconds: 400),
+                                curve: Curves.easeIn);
                           },
-                          child: Text("حاول مرة اخرى",
-                              style: TextStyle(
-                                fontFamily: "Madani",
-                                fontSize: 15.sp,
-                              )))
+                          img: "buttons/backword.png",
+                          size: 76.w),
+                      Button(
+                          onTap: () {
+                            ///
+                            loadInterAd();
+
+                            ///
+                            play(_items[_currentPage % _items.length]["audio"]);
+                          },
+                          img: "buttons/volume.png",
+                          size: 106.w),
+                      Button(
+                          onTap: () {
+                            ///
+                            loadInterAd();
+
+                            ///
+                            if (_currentPage > 0) {
+                              pageController.animateToPage(_currentPage - 1,
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeIn);
+                            }
+                          },
+                          img: "buttons/forword.png",
+                          size: 76.w),
                     ],
                   ),
-                )
-              : Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Button(
-                            onTap: () {
-                              Get.back();
-                            },
-                            img: "buttons/backword.png",
-                            size: 60.w),
-                        Text(
-                          _title,
-                          style: TextStyle(
-                            fontSize: 40.sp,
-                            fontFamily: "Dahka",
-                            color: const Color(0xff1A132F),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    SizedBox(
-                      // color: Colors.red,
-                      width: 320.w,
-                      height: 380.h,
-                      child: PageView.builder(
-                          scrollDirection: Axis.horizontal,
-                          controller: pageController,
-                          onPageChanged: (index) {
-                            play(_items[index % _items.length]["audio"]);
-                            setState(() {
-                              _currentPage = index;
-                            });
-                          },
-                          reverse: true,
-                          itemBuilder: (context, index) {
-                            return Stack(children: [
-                              _items[index % _items.length]["img"] == null
-                                  ? const SizedBox()
-                                  : Positioned.fill(
-                                      top: 45.h,
-                                      child: Align(
-                                        alignment: Alignment.topCenter,
-                                        child: Container(
-                                          width: 250.r,
-                                          height: 250.r,
-                                          decoration: BoxDecoration(
-                                            // color: Colors.purple,
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/${_items[index % _items.length]["img"]}'),
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                              _items[index % _items.length]["letter"] == null
-                                  ? const SizedBox()
-                                  : Positioned.fill(
-                                      top: -12.h,
-                                      child: Align(
-                                        alignment: Alignment.topRight,
-                                        child: Text(
-                                          "${_items[index % _items.length]["letter"]}",
-                                          style: TextStyle(
-                                              fontFamily: "Madani",
-                                              fontSize: 80.sp,
-                                              color: const Color(0xffE60965)),
-                                        ),
-                                      ),
-                                    ),
-                              _items[index % _items.length]["word"] == null
-                                  ? const SizedBox()
-                                  : Positioned.fill(
-                                      // bottom: 0.h,
-                                      child: Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Text(
-                                          "${_items[index % _items.length]["word"]}",
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                            fontSize: 60.sp,
-                                            fontFamily: 'Madani',
-                                            color: const Color(0xff1A132F),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                            ]);
-                          }),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Center(
-                      child: SizedBox(
-                        width: 300.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Button(
-                                onTap: () {
-                                  pageController.animateToPage(_currentPage + 1,
-                                      duration:
-                                          const Duration(milliseconds: 400),
-                                      curve: Curves.easeIn);
-                                },
-                                img: "buttons/backword.png",
-                                size: 76.w),
-                            Button(
-                                onTap: () {
-                                  play(_items[_currentPage % _items.length]
-                                      ["audio"]);
-                                },
-                                img: "buttons/volume.png",
-                                size: 106.w),
-                            Button(
-                                onTap: () {
-                                  if (_currentPage > 0) {
-                                    pageController.animateToPage(
-                                        _currentPage - 1,
-                                        duration:
-                                            const Duration(milliseconds: 400),
-                                        curve: Curves.easeIn);
-                                  }
-                                },
-                                img: "buttons/forword.png",
-                                size: 76.w),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
+              ),
+            ],
+          ),
         )));
   }
 }

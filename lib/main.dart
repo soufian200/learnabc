@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:learnabc/AdsManager.dart';
+import 'package:learnabc/interstitial_binding.dart';
 import 'package:learnabc/screens/preview.dart';
 import 'package:learnabc/utils/AppRoutes.dart';
 import 'package:learnabc/widgets/card_widget.dart';
@@ -28,7 +29,10 @@ void main() {
                   page: () => const MyHomePage(
                         title: 'hello world',
                       )),
-              GetPage(name: AppRoutes.preview, page: () => const Preview()),
+              GetPage(
+                  name: AppRoutes.preview,
+                  page: () => const Preview(),
+                  binding: InterAdBinding()),
             ],
           )));
 }
@@ -70,7 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // lock screen orientation
     SystemChrome.setPreferredOrientations([
