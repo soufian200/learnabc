@@ -4,8 +4,6 @@ class AdsManager {
   static const bool isAdsEnabled = true;
   static const bool _testMode = false;
 
-  static const timeToShowAd = 22;
-
   /// AppID
   static String get appId {
     if (Platform.isAndroid) {
